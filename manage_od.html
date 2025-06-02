@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2 class="text-2xl font-bold mb-4">Manage OD Request</h2>
+    <div class="max-w-md mx-auto">
+        <h3 class="text-xl font-semibold mb-2">OD Request Details</h3>
+        <p><strong>Student Name:</strong> {{ od_request[2] }}</p>
+        <p><strong>Phone Number:</strong> {{ od_request[3] }}</p>
+        <p><strong>Place/College:</strong> {{ od_request[4] }}</p>
+        <p><strong>Event Date:</strong> {{ od_request[9] }}</p>
+        <p><strong>Submitted At:</strong> {{ od_request[8] }}</p>
+        <p><strong>Registration Proof:</strong>
+            {% if od_request[5] %}
+                <a href="/{{ od_request[5] }}" target="_blank" class="text-blue-600 hover:underline">View</a>
+            {% else %}
+                None
+            {% endif %}
+        </p>
+        <form method="POST" class="mt-4">
+            <div class="mb-4">
+                <label for="action" class="block text-sm font-medium">Action</label>
+                <select name="action" id="action" class="w-full border rounded p-2" required>
+                    <option value="" disabled selected>Select Action</option>
+                    <option value="approve">Approve</option>
+                    <option value="reject">Reject</option>
+                </select>
+            </div>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
+        </form>
+    </div>
+{% endblock %}

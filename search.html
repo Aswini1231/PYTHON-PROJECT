@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2 class="text-2xl font-bold mb-4">Search OD History</h2>
+    <form method="POST" class="mb-4">
+        <input type="text" name="search_term" placeholder="Search by name or place" class="border rounded p-2 mr-2">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Search</button>
+    </form>
+    {% if results %}
+        <table class="w-full border">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="p-2">Name</th>
+                    <th class="p-2">Phone</th>
+                    <th class="p-2">Place</th>
+                    <th class="p-2">Status</th>
+                    <th class="p-2">Submitted At</th>
+                    <th class="p-2">Proof</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for req in results %}
+                    <tr>
+                        <td class="p-2">{{ req[2] }}</td>
+                        <td class="p-2">{{ req[3] }}</td>
+                        <td class="p-2">{{ req[4] }}</td>
+                        <td class="p-2">{{ req[6] }}</td>
+                        <td class="p-2">{{ req[7] }}</td>
+                        <td class="p-2">
+                            {% if req[5] %}
+                                <a href="/{{ req[5] }}" target="_blank">Registration</a>
+                            {% endif %}
+                            {% if req[6] %}
+                                | <a href="/{{ req[6] }}" target="_blank">Participation</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
